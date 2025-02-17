@@ -36,6 +36,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             <Button Content="Add"/>
+            <Button Content="Refresh" Command="{Binding RefreshCommand}"/>
         </StackPanel>
 
         
@@ -58,7 +59,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Update" Grid.Column="0"/>
+                <Button Content="Update" Grid.Column="0" Command="{Binding UpdateCommand}"/>
                 <Button Content="Delete" Grid.Column="1"/>
             </Grid>
         </StackPanel>
