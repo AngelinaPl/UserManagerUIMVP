@@ -52,11 +52,13 @@ public static class UserManager
 
     public static void Delete(int id)
     {
-        throw new NotImplementedException();
+        var userToRemove = _users.FirstOrDefault(_ => _.Id == id);
+        _users.Remove(userToRemove);
     }
 
     public static List<User> GetAll()
     {
         return _users;
     }
+
 }

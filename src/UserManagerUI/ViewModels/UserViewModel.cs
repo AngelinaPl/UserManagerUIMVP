@@ -58,6 +58,11 @@ public class UserViewModel : BaseViewModel
         get;
     }
 
+    public ICommand DeleteUserCommand
+    {
+        get;
+    }
+
     private void ExecuteUpdateCommand()
     {
         UserManager.Update(
@@ -72,7 +77,11 @@ public class UserViewModel : BaseViewModel
     public UserViewModel()
     {
         UpdateCommand = new RelayCommand(ExecuteUpdateCommand);
-
+        DeleteUserCommand = new RelayCommand(ExecuteDeleteUser);
     }
-    
+
+    private void ExecuteDeleteUser()
+    {
+        UserManager.Delete(Id);
+    }
 }

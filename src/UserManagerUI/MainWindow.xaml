@@ -60,7 +60,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Content="Update" Grid.Column="0" Command="{Binding UpdateCommand}"/>
-                <Button Content="Delete" Grid.Column="1"/>
+                <Button Content="Delete" Grid.Column="1"  Command="{Binding DeleteUserCommand}"/>
             </Grid>
         </StackPanel>
 
