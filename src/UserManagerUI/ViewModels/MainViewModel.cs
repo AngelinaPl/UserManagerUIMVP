@@ -9,9 +9,9 @@ public class MainViewModel : BaseViewModel
 {
     private UserViewModel _selectedUser;
 
-    public ICommand SetSomeValueCommand { get; }
+    public ICommand RefreshCommand { get; }
 
-    public ObservableCollection<UserViewModel> Users { get; }
+    public ObservableCollection<UserViewModel> Users { get; private set; }
 
     public UserViewModel SelectedUser
     {
@@ -28,7 +28,7 @@ public class MainViewModel : BaseViewModel
 
     public MainViewModel()
     {
-        SetSomeValueCommand = new RelayCommand(ExecuteSetSomeValue);
+        RefreshCommand = new RelayCommand(Refresh);
         var users = UserManager.GetAll();
         Users = new ObservableCollection<UserViewModel>(users.Select(_ => new UserViewModel
         {
@@ -39,12 +39,24 @@ public class MainViewModel : BaseViewModel
         }));
     }
 
-    #region SetSomeValueCommand
+    #region Refresh
 
-    private void ExecuteSetSomeValue()
+    private void Refresh()
     {
-        //SomeValue = Guid.NewGuid().ToString();
-    }
+        Users.Clear();
+        var users = UserManager.GetAll();
+        foreach (var user in users)
+        {
+            Users.Add(new UserViewModel
+            {
+                Age = user.Age,
+                Id = user.Id,
+                Surname = user.Surname,
+                Name = user.Name,
+            }
+                );
+        }
 
-    #endregion
+        #endregion
+    }
 }

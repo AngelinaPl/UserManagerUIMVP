@@ -1,4 +1,8 @@
-﻿namespace UserManagerUI.ViewModels;
+﻿using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
+using UserManagerUI.Managers;
+
+namespace UserManagerUI.ViewModels;
 
 public class UserViewModel : BaseViewModel
 {
@@ -49,4 +53,26 @@ public class UserViewModel : BaseViewModel
             OnPropertyChanged(nameof(Age));
         }
     }
+    public ICommand UpdateCommand
+    {
+        get;
+    }
+
+    private void ExecuteUpdateCommand()
+    {
+        UserManager.Update(
+            new Models.User
+            {
+                Name = Name,
+                Surname = Surname,
+                Id = Id,
+                Age = Age
+            });
+    }
+    public UserViewModel()
+    {
+        UpdateCommand = new RelayCommand(ExecuteUpdateCommand);
+
+    }
+    
 }

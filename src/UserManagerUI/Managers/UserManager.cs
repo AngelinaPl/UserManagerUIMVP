@@ -39,7 +39,10 @@ public static class UserManager
 
     public static void Update(User user)
     {
-        throw new NotImplementedException();
+        var foundItem = _users.FirstOrDefault(_ => _.Id == user.Id);
+        foundItem.Name = user.Name;
+        foundItem.Surname = user.Surname;
+        foundItem.Age = user.Age;
     }
 
     public static void Add(User user)
