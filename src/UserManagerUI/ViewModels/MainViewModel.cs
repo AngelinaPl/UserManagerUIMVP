@@ -31,24 +31,18 @@ public class MainViewModel : BaseViewModel
     public MainViewModel()
     {
         RefreshCommand = new RelayCommand(Refresh);
-        var users = UserManager.GetAll();
-        Users = new ObservableCollection<UserViewModel>(users.Select(_ => new UserViewModel
-        {
-            Age = _.Age,
-            Id = _.Id,
-            Surname = _.Surname,
-            Name = _.Name,
-        }));
+      //  var users = UserManager.GetAll();
+        Users = new ObservableCollection<UserViewModel>();
         AddCommand = new RelayCommand(ExecuteAdd);
 
     }
 
     #region Refresh
 
-    private void Refresh()
+    private async void Refresh()
     {
         Users.Clear();
-        var users = UserManager.GetAll();
+        var users = await UserManager.GetAll();
         foreach (var user in users)
         {
             Users.Add(new UserViewModel
@@ -67,10 +61,5 @@ public class MainViewModel : BaseViewModel
     private void ExecuteAdd()
     {
         UserManager.Create();
-            
-
-        
-            
-    
     }
 }

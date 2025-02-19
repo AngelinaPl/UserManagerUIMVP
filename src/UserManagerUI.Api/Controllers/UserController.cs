@@ -27,7 +27,8 @@ namespace UserManagerUI.Api.Controllers
         [HttpGet("Get-All")]
         public async Task<User[]> GetAll()
         {
-            throw new NotImplementedException();
+            var users = _userService.GetAll();
+            return users.ToArray();
         }
 
         [HttpPost("Update")]
