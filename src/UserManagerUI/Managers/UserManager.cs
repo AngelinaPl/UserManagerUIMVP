@@ -1,4 +1,7 @@
-﻿using UserManagerUI.Models;
+﻿using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
+using UserManagerUI.Models;
 
 namespace UserManagerUI.Managers;
 
@@ -45,17 +48,46 @@ public static class UserManager
         foundItem.Age = user.Age;
     }
 
-    public static void Add()
+    public async static Task<User> Create()
     {
-        var idForNewUser = (_users.Max(x => x.Id)) + 1;
-        var newUser = new User
+        using (HttpClient client = new HttpClient())
         {
-            Id = idForNewUser,
-            Age = default,
-            Name = default,
-            Surname = default
-        };
-        _users.Add(newUser);
+            string url = "http://localhost:5000/User/Create";
+
+            //var user = new
+            //{
+            //    Name = "John",
+            //    Surname = "Doe",
+            //    Age = 30,
+            //    Id = 7
+            //};
+            //string jsonData = JsonConvert.SerializeObject(user);
+
+            //StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                //HttpResponseMessage response = await client.PostAsync(url, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Читаем тело ответа
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    var user = JsonConvert.DeserializeObject<User>(responseBody);
+                    return user;
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 
     public static void Delete(int id)

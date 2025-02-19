@@ -66,7 +66,7 @@ public class MainViewModel : BaseViewModel
 
     private void ExecuteAdd()
     {
-        UserManager.Add();
+        UserManager.Create();
             
 
         
