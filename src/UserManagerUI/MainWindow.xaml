@@ -35,7 +35,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            <Button Content="Add"/>
+            <Button Content="Add" Command="{Binding AddCommand}"/>
             <Button Content="Refresh" Command="{Binding RefreshCommand}"/>
         </StackPanel>
 

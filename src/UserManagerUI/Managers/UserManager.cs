@@ -45,9 +45,17 @@ public static class UserManager
         foundItem.Age = user.Age;
     }
 
-    public static void Add(User user)
+    public static void Add()
     {
-        throw new NotImplementedException();
+        var idForNewUser = (_users.Max(x => x.Id)) + 1;
+        var newUser = new User
+        {
+            Id = idForNewUser,
+            Age = default,
+            Name = default,
+            Surname = default
+        };
+        _users.Add(newUser);
     }
 
     public static void Delete(int id)

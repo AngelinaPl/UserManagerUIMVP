@@ -11,6 +11,8 @@ public class MainViewModel : BaseViewModel
 
     public ICommand RefreshCommand { get; }
 
+    public ICommand AddCommand { get; }
+
     public ObservableCollection<UserViewModel> Users { get; private set; }
 
     public UserViewModel SelectedUser
@@ -37,6 +39,8 @@ public class MainViewModel : BaseViewModel
             Surname = _.Surname,
             Name = _.Name,
         }));
+        AddCommand = new RelayCommand(ExecuteAdd);
+
     }
 
     #region Refresh
@@ -58,5 +62,15 @@ public class MainViewModel : BaseViewModel
         }
 
         #endregion
+    }
+
+    private void ExecuteAdd()
+    {
+        UserManager.Add();
+            
+
+        
+            
+    
     }
 }
