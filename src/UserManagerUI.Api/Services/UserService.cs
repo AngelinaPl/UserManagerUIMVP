@@ -61,7 +61,7 @@ namespace UserManagerUI.Api.Services
 
         public List<User> GetAll()
         {
-            throw new NotImplementedException();
+            return _users;
         }
 
         public void Update(User user)
